@@ -3,222 +3,757 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Govindaraj S | UI Developer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Govindaraj S — Frontend Developer</title>
+    <meta name="description" content="Portfolio of Govindaraj S, Frontend Developer specializing in Angular, React, and responsive design." />
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons (Remixicon) -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
 
     <style>
+        .reveal {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 600ms ease, transform 600ms ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .reveal-left {
+            transform: translateX(-60px);
+        }
+        
+         :root {
+            --bg: #0b0f19;
+            --bg-soft: #121729;
+            --card: rgba(255, 255, 255, 0.06);
+            --text: #e7eaf3;
+            --muted: #acb3c7;
+            --brand: #7c4dff;
+            --brand-2: #00d4ff;
+            --border: rgba(255, 255, 255, 0.12);
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            --radius: 16px;
+            --radius-sm: 12px;
+            --maxw: 1100px;
+            --transition: 280ms ease;
+        }
+        /* Light theme variables */
+        
+        .light {
+            --bg: #f7f8fc;
+            --bg-soft: #ffffff;
+            --card: rgba(255, 255, 255, 0.85);
+            --text: #131521;
+            --muted: #4d5568;
+            --brand: #6a5cff;
+            --brand-2: #00a7e6;
+            --border: rgba(20, 24, 40, 0.12);
+            --shadow: 0 8px 24px rgba(20, 24, 40, 0.1);
+        }
+        
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box
+        }
+        
+        html {
+            scroll-behavior: smooth
         }
         
         body {
-            color: #333;
-            line-height: 1.6;
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            background: linear-gradient(120deg, var(--bg) 0%, #0f1530 60%, #16204a 100%);
+            color: var(--text);
+        }
+        /* Gradient hero overlay for depth */
+        
+        .hero-gradient {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: radial-gradient(1200px 600px at 10% 20%, rgba(124, 77, 255, 0.18), transparent 60%), radial-gradient(1200px 600px at 90% 20%, rgba(0, 212, 255, 0.18), transparent 60%);
+            pointer-events: none;
         }
         
         header {
-            background: linear-gradient(135deg, #2563eb, #1e40af);
-            color: #fff;
-            padding: 5rem 2rem;
-            text-align: center;
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(12px);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.08));
+            border-bottom: 1px solid var(--border);
+            z-index: 50;
         }
         
-        header h1 {
-            font-size: 2.5rem;
+        .nav {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
         
-        header p {
-            margin-top: 0.8rem;
-            font-size: 1.1rem;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: Space Grotesk, Inter, sans-serif;
         }
         
-        section {
-            padding: 4rem 2rem;
-            max-width: 1100px;
-            margin: auto;
+        .brand .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: conic-gradient(from 180deg, var(--brand), var(--brand-2), var(--brand));
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
         }
         
-        h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: #1e40af;
+        .brand h1 {
+            font-size: 18px;
+            letter-spacing: 0.4px;
+            margin: 0;
+            font-weight: 800;
         }
         
-        .summary {
-            text-align: center;
-            max-width: 800px;
-            margin: auto;
+        .navlinks {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
         
-        .skills-grid {
+        .navlinks a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 8px 12px;
+            border-radius: 10px;
+            transition: background var(--transition), color var(--transition);
+        }
+        
+        .navlinks a:hover {
+            background: var(--card)
+        }
+        
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            background: var(--card);
+        }
+        
+        .theme-toggle i {
+            font-size: 18px
+        }
+        
+        .container {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 28px 20px;
+        }
+        /* Hero */
+        
+        .hero {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            gap: 24px;
+            align-items: center;
+            padding: 40px 0;
+        }
+        
+        .hero-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            box-shadow: var(--shadow);
+            animation: fadeUp 600ms ease both;
+        }
+        
+        .hero-title {
+            font-family: Space Grotesk;
+            font-size: 36px;
+            line-height: 1.15;
+            margin: 0 0 12px;
+            font-weight: 800;
+        }
+        
+        .hero-sub {
+            color: var(--muted);
+            font-size: 16px;
+            margin: 0 0 16px
+        }
+        
+        .contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        
+        .pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.06);
+        }
+        
+        .pill i {
+            color: var(--brand-2)
+        }
+        
+        .hero-visual {
+            min-height: 220px;
+            background: linear-gradient(135deg, rgba(124, 77, 255, 0.18), rgba(0, 212, 255, 0.2));
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-visual::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            backdrop-filter: blur(16px);
+            mask-image: radial-gradient(400px 120px at 65% 35%, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6), transparent 60%);
+        }
+        
+        .badges {
+            position: absolute;
+            left: 16px;
+            bottom: 16px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        /* Section heading */
+        
+        .section {
+            margin: 24px 0;
+        }
+        
+        .section h2 {
+            font-family: Space Grotesk;
+            font-size: 24px;
+            margin: 0 0 12px;
+            font-weight: 800;
+        }
+        
+        .section p {
+            color: var(--muted);
+            margin: 0 0 8px
+        }
+        /* Grid cards */
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
         }
         
         .card {
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-            background: #fff;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 18px;
+            box-shadow: var(--shadow);
+            transition: transform var(--transition), border-color var(--transition);
         }
         
-        .experience-item {
-            margin-bottom: 2.5rem;
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0, 212, 255, 0.35)
         }
         
-        .experience-item h3 {
-            color: #2563eb;
-            font-size: 1.2rem;
+        .card h3 {
+            margin: 0 0 6px;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 0.2px;
         }
         
-        .experience-item span {
-            font-size: 0.9rem;
-            color: #555;
+        .card ul {
+            margin: 12px 0 0;
+            padding-left: 18px;
+            color: var(--muted)
         }
         
-        ul {
-            margin-top: 0.8rem;
-            padding-left: 1.2rem;
+        .card .stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
         }
         
-        ul li {
-            margin-bottom: 0.5rem;
+        .chip {
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            border: 1px dashed var(--border);
+            background: rgba(255, 255, 255, 0.04);
         }
+        /* Experience timeline */
+        
+        .timeline {
+            position: relative;
+            margin: 16px 0 0;
+            padding-left: 26px;
+        }
+        
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 10px;
+            top: 6px;
+            bottom: 6px;
+            width: 2px;
+            background: linear-gradient(180deg, var(--brand), var(--brand-2));
+            border-radius: 2px;
+        }
+        
+        .item {
+            position: relative;
+            margin: 14px 0;
+            padding: 14px 14px 14px 18px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow);
+            animation: fadeUp 600ms ease both;
+        }
+        
+        .item::before {
+            content: "";
+            position: absolute;
+            left: -22px;
+            top: 20px;
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle at 35% 35%, #fff, var(--brand-2));
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
+        }
+        
+        .item-header {
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        
+        .company {
+            font-weight: 800
+        }
+        
+        .role {
+            color: var(--muted)
+        }
+        
+        .period {
+            margin-left: auto;
+            color: var(--muted);
+            font-size: 13px
+        }
+        
+        .project {
+            font-weight: 700;
+            margin-top: 6px
+        }
+        
+        .bullets {
+            margin: 8px 0;
+            padding-left: 18px;
+            color: var(--muted)
+        }
+        
+        .tech {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px
+        }
+        /* Footer */
         
         footer {
-            background: #0f172a;
-            color: #fff;
-            text-align: center;
-            padding: 2rem;
+            margin-top: 32px;
+            border-top: 1px solid var(--border);
+            background: var(--bg-soft);
         }
         
-        a {
-            color: #2563eb;
+        .footer-wrap {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 18px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            color: var(--muted);
+        }
+        /* Utilities */
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: linear-gradient(180deg, rgba(124, 77, 255, 0.32), rgba(0, 212, 255, 0.22));
+            color: #fff;
             text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            box-shadow: var(--shadow);
+            transition: filter var(--transition), transform var(--transition);
+        }
+        
+        .btn:hover {
+            filter: brightness(1.08);
+            transform: translateY(-1px)
+        }
+        
+        .muted {
+            color: var(--muted)
+        }
+        
+        .spacer {
+            height: 6px
+        }
+        /* Animations */
+        
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(8px)
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+        /* Responsive */
+        
+        @media (max-width: 960px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 720px) {
+            .grid {
+                grid-template-columns: 1fr 1fr
+            }
+            .period {
+                margin-left: 0
+            }
+        }
+        
+        @media (max-width: 520px) {
+            .grid {
+                grid-template-columns: 1fr
+            }
+            .navlinks {
+                display: none
+            }
         }
     </style>
 </head>
 
 <body>
+    <div class="hero-gradient"></div>
 
-    <!-- HERO -->
+    <!-- Header / Nav -->
     <header>
-        <h1>Govindaraj S</h1>
-        <p>UI / Frontend Developer | Angular | React</p>
-        <p>
-            +91 99875633 |
-            <a href="mailto:govindwrk@gmail.com" style="color:#fff;">govindwrk@gmail.com</a>
-        </p>
+        <nav class="nav">
+            <div class="brand">
+                <div class="logo" aria-hidden="true"></div>
+                <h1>GOVINDARAJ S</h1>
+            </div>
+            <div class="navlinks">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#experience">Experience</a>
+                <a href="#education">Education</a>
+            </div>
+            <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+        <i class="ri-sun-line"></i>
+        <span>Theme</span>
+      </button>
+        </nav>
     </header>
 
-    <!-- SUMMARY -->
-    <section class="summary">
-        <h2>Professional Summary</h2>
-        <p>
-            Versatile Frontend Developer with 10 years of experience in designing and developing responsive and user-friendly web applications. Specialized in Angular, React, and modern UI/UX practices.
-        </p>
-    </section>
-
-    <!-- SKILLS -->
-    <section>
-        <h2>Technical Skills</h2>
-        <div class="skills-grid">
-            <div class="card">
-                <h3>UX Technologies</h3>
-                <p>Figma</p>
+    <main class="container">
+        <!-- Hero -->
+        <section id="about" class="hero">
+            <div class="hero-card reveal">
+                <h2 class="hero-title">Frontend Developer</h2>
+                <p class="hero-sub">Versatile Frontend Developer with 10 years of experience in designing and developing web applications. Specializes in Angular, React, and responsive design.</p>
+                <div class="contact">
+                    <div class="pill"><i class="ri-mail-line"></i> govindwrk@gmail.com</div>
+                    <a class="btn" href="#experience"><i class="ri-briefcase-3-line"></i> View Experience</a>
+                </div>
             </div>
-            <div class="card">
-                <h3>UI Technologies</h3>
-                <p>Angular, React, HTML5, CSS3, JavaScript</p>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" class="section">
+            <h2>Technical skills</h2>
+            <p class="muted">Tools and technologies I use across UX and UI development.</p>
+            <div class="grid">
+                <div class="card reveal">
+                    <h3>UX technologies</h3>
+                    <div class="stack">
+                        <span class="chip">Figma</span>
+                        <span class="chip">Wireframing</span>
+                        <span class="chip">Prototyping</span>
+                    </div>
+                </div>
+                <div class="card reveal">
+                    <h3>UI technologies</h3>
+                    <div class="stack">
+                        <span class="chip">Angular</span>
+                        <span class="chip">React</span>
+                        <span class="chip">TypeScript</span>
+                        <span class="chip">HTML5</span>
+                        <span class="chip">CSS3</span>
+                        <span class="chip">JavaScript</span>
+                        <span class="chip">Angular Material</span>
+                        <span class="chip">Bootstrap</span>
+                        <span class="chip">RxJS</span>
+                    </div>
+                </div>
+                <div class="card reveal">
+                    <h3>Development tools</h3>
+                    <div class="stack">
+                        <span class="chip">Visual Studio Code</span>
+                        <span class="chip">Notepad++</span>
+                        <span class="chip">Git</span>
+                        <span class="chip">JIRA</span>
+                        <span class="chip">Postman</span>
+                        <span class="chip">Adobe Photoshop</span>
+                    </div>
+                </div>
             </div>
-            <div class="card">
-                <h3>Tools</h3>
-                <p>Visual Studio Code, Notepad++</p>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience" class="section">
+            <h2>Work experience</h2>
+            <p class="muted">A timeline of roles, projects, and contributions.</p>
+
+            <div class="timeline">
+                <!-- Accenture -->
+                <div class="item reveal">
+                    <div class="item-header">
+                        <span class="company">Accenture</span>
+                        <span class="role">Technical Lead</span>
+                        <span class="period">Oct 2025 – Present</span>
+                    </div>
+                    <div class="project muted">Enterprise Angular application</div>
+                    <ul class="bullets">
+                        <li>Leading UI development initiatives and contributing to enterprise-level Angular application.</li>
+                        <li>Working with Angular, TypeScript, HTML, CSS, and API integration.</li>
+                        <li>Participating in code reviews and solution discussions.</li>
+                        <li>Collaborating with cross-functional teams for design, development, and deployment.</li>
+                    </ul>
+                    <div class="tech">
+                        <span class="chip">Angular 17</span>
+                        <span class="chip">Angular Material</span>
+                        <span class="chip">Bootstrap</span>
+                        <span class="chip">Visual Studio Code</span>
+                    </div>
+                </div>
+
+                <!-- Wipro -->
+                <div class="item reveal">
+                    <div class="item-header">
+                        <span class="company">Wipro Technologies</span>
+                        <span class="role">Technical Lead</span>
+                        <span class="period">Jan 2022 – Oct 2025</span>
+                    </div>
+                    <div class="project"><strong>Project:</strong> DBCTScan — Citi Bank</div>
+                    <p class="muted">In-house vulnerability assessment tool that scans DB configurations periodically and generates reports.</p>
+                    <ul class="bullets">
+                        <li>Designed responsive, user-friendly interfaces using Angular Material, Bootstrap, and custom CSS.</li>
+                        <li>Developed Angular applications with material components, forms, and routing.</li>
+                        <li>Integrated RESTful APIs to enhance functionality.</li>
+                        <li>Handled state with RxJS Subjects and BehaviorSubjects.</li>
+                        <li>Mentored junior developers and ensured best practices.</li>
+                        <li>Participated in Agile Scrum, sprint planning, and backlog grooming.</li>
+                    </ul>
+                    <div class="tech">
+                        <span class="chip">Angular 17</span>
+                        <span class="chip">Angular Material</span>
+                        <span class="chip">Bootstrap</span>
+                        <span class="chip">RxJS</span>
+                        <span class="chip">Visual Studio Code</span>
+                    </div>
+                </div>
+
+                <!-- Onward -->
+                <div class="item reveal">
+                    <div class="item-header">
+                        <span class="company">Onward Technologies</span>
+                        <span class="role">Senior Software Engineer</span>
+                        <span class="period">Feb 2021 – Jan 2022</span>
+                    </div>
+                    <div class="project"><strong>Project:</strong> Papco — Daimler</div>
+                    <p class="muted">Papco helps order truck parts online.</p>
+                    <ul class="bullets">
+                        <li>Developed front-end using Bootstrap, JavaScript, and React.js for accessibility and cross-browser compatibility.</li>
+                        <li>Built React components, forms, events, and routing.</li>
+                        <li>Used Git for version control and JIRA for tracking bugs.</li>
+                    </ul>
+                    <div class="tech">
+                        <span class="chip">React.js</span>
+                        <span class="chip">Bootstrap</span>
+                        <span class="chip">Visual Studio Code</span>
+                        <span class="chip">Git</span>
+                        <span class="chip">JIRA</span>
+                    </div>
+                </div>
+
+                <!-- Furtim -->
+                <div class="item reveal">
+                    <div class="item-header">
+                        <span class="company">Furtim Technologies</span>
+                        <span class="role">UI Developer</span>
+                        <span class="period">Jan 2019 – Dec 2020</span>
+                    </div>
+                    <div class="project"><strong>Project:</strong> Shiney</div>
+                    <p class="muted">A platform connecting users with haircut professionals for home services.</p>
+                    <ul class="bullets">
+                        <li>Gathered and evaluated user requirements with product managers.</li>
+                        <li>Created wireframes and high-fidelity interactive prototypes.</li>
+                        <li>Developed Angular apps with modules, services, templates, and directives.</li>
+                        <li>Tested REST APIs using Postman.</li>
+                    </ul>
+                    <div class="tech">
+                        <span class="chip">Angular 10</span>
+                        <span class="chip">Bootstrap</span>
+                        <span class="chip">Adobe Photoshop</span>
+                        <span class="chip">Figma</span>
+                        <span class="chip">Visual Studio Code</span>
+                        <span class="chip">Postman</span>
+                    </div>
+                </div>
+
+                <!-- Matrimony -->
+                <div class="item reveal">
+                    <div class="item-header">
+                        <span class="company">Matrimony.com</span>
+                        <span class="role">Web Designer</span>
+                        <span class="period">July 2015 – Jan 2019</span>
+                    </div>
+                    <div class="project"><strong>Project:</strong> Matrimony Bazaar</div>
+                    <p class="muted">Helps users find wedding vendors nearby.</p>
+                    <ul class="bullets">
+                        <li>Designed wireframes & prototypes and developed responsive UI.</li>
+                        <li>Worked with stakeholders to translate designs into HTML5/CSS3.</li>
+                    </ul>
+                    <div class="tech">
+                        <span class="chip">HTML5</span>
+                        <span class="chip">CSS3</span>
+                        <span class="chip">Bootstrap</span>
+                        <span class="chip">JavaScript</span>
+                        <span class="chip">Adobe Photoshop</span>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- EXPERIENCE -->
-    <section>
-        <h2>Work Experience</h2>
+        <!-- Education -->
+        <section id="education" class="section">
+            <h2>Education</h2>
+            <div class="card reveal">
+                <h3>B.E Computer Science</h3>
+                <p class="muted">Anna University — June 2010 to July 2014</p>
+            </div>
+        </section>
+    </main>
 
-        <div class="experience-item">
-            <h3>Accenture – Technical Lead</h3>
-            <span>Oct 2025 – Present</span>
-            <ul>
-                <li>Leading UI development for enterprise-level Angular applications.</li>
-                <li>Working with Angular, TypeScript, HTML, CSS, and REST API integration.</li>
-                <li>Participating in code reviews and solution design discussions.</li>
-                <li>Collaborating with cross-functional teams for development and deployment.</li>
-            </ul>
-            <strong>Tech:</strong> Angular 17, Angular Material, Bootstrap
-        </div>
+    <script>
+        const root = document.documentElement;
+        const toggle = document.getElementById('themeToggle');
+        const saved = localStorage.getItem('theme');
+        if (saved === 'light') {
+            document.body.classList.add('light');
+        }
 
-        <div class="experience-item">
-            <h3>Wipro Technologies – Technical Lead</h3>
-            <span>Jan 2022 – Oct 2025 | Project: DBCTScan (Citi Bank)</span>
-            <ul>
-                <li>Designed responsive interfaces using Angular Material and Bootstrap.</li>
-                <li>Developed Angular components, forms, and routing.</li>
-                <li>Integrated RESTful APIs.</li>
-                <li>Handled state management with RxJS Subjects and BehaviorSubjects.</li>
-                <li>Mentored junior developers and followed Agile practices.</li>
-            </ul>
-            <strong>Tech:</strong> Angular 17, Angular Material, Bootstrap
-        </div>
+        toggle.addEventListener('click', () => {
+            document.body.classList.toggle('light');
+            localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+            toggle.querySelector('i').className = document.body.classList.contains('light') ? 'ri-moon-line' : 'ri-sun-line';
+        });
 
-        <div class="experience-item">
-            <h3>Onward Technologies – Senior Software Engineer</h3>
-            <span>Feb 2021 – Jan 2022 | Project: Papco (Daimler)</span>
-            <ul>
-                <li>Developed frontend using React.js and Bootstrap.</li>
-                <li>Worked on components, routing, and form handling.</li>
-                <li>Used Git and JIRA for version control and tracking.</li>
-            </ul>
-            <strong>Tech:</strong> React.js, Bootstrap
-        </div>
+        // Set initial icon
+        toggle.querySelector('i').className = document.body.classList.contains('light') ? 'ri-moon-line' : 'ri-sun-line';
 
-        <div class="experience-item">
-            <h3>Furtim Technologies – UI Developer</h3>
-            <span>Jan 2019 – Dec 2020 | Project: Shiney</span>
-            <ul>
-                <li>Created wireframes and interactive prototypes.</li>
-                <li>Developed Angular applications with services and directives.</li>
-                <li>Tested APIs using Postman.</li>
-            </ul>
-            <strong>Tech:</strong> Angular 10, Bootstrap, Figma
-        </div>
+        // Soft reveal on scroll
+        // Scroll reveal transition (added)
+        const revealElements = document.querySelectorAll('.reveal');
 
-        <div class="experience-item">
-            <h3>Matrimony.com – Web Designer</h3>
-            <span>Jul 2015 – Jan 2019 | Project: Matrimony Bazaar</span>
-            <ul>
-                <li>Designed wireframes and responsive UIs.</li>
-                <li>Converted designs into HTML5/CSS3.</li>
-            </ul>
-            <strong>Tech:</strong> HTML5, CSS3, Bootstrap
-        </div>
-    </section>
+        const onScrollReveal = () => {
+            const triggerPoint = window.innerHeight - 80;
 
-    <!-- EDUCATION -->
-    <section>
-        <h2>Education</h2>
-        <p>
-            <strong>B.E Computer Science</strong> – Anna University<br/> June 2010 – July 2014
-        </p>
-    </section>
+            revealElements.forEach(el => {
+                const top = el.getBoundingClientRect().top;
+                if (top < triggerPoint) {
+                    el.classList.add('active');
+                }
+            });
+        };
 
-    <!-- FOOTER -->
-    <footer>
-        <p>© 2025 Govindaraj S | UI Developer</p>
-    </footer>
+        window.addEventListener('scroll', onScrollReveal);
+        onScrollReveal();
 
+
+        // Smooth anchor offset fix for sticky header
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', (e) => {
+                const id = a.getAttribute('href').slice(1);
+                const el = document.getElementById(id);
+                if (el) {
+                    e.preventDefault();
+                    const top = el.getBoundingClientRect().top + window.scrollY - 60;
+                    window.scrollTo({
+                        top,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
