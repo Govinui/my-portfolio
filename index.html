@@ -33,6 +33,7 @@
             --bg: #0b0f19;
             --bg-soft: #121729;
             --card: rgba(255, 255, 255, 0.06);
+            --toggl: #027ce0;
             --text: #e7eaf3;
             --muted: #acb3c7;
             --brand: #7c4dff;
@@ -152,6 +153,7 @@
             border-radius: 10px;
             cursor: pointer;
             background: var(--card);
+            color: var(--toggl)
         }
         
         .theme-toggle i {
@@ -355,7 +357,7 @@
             top: 20px;
             width: 12px;
             height: 12px;
-            background: radial-gradient(circle at 35% 35%, #fff, var(--brand-2));
+            background: conic-gradient(from 180deg, var(--brand), var(--brand-2), var(--brand));
             border: 1px solid var(--border);
             border-radius: 50%;
             box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
